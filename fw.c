@@ -89,7 +89,6 @@ int main(int argc, char *argv[])
         }
     }
     freeTree(tree);
-    freeTree(high);
     return 0;
 }
 
@@ -101,6 +100,7 @@ void freeTree(struct Node *tree)
     }
     freeTree(tree -> right);
     freeTree(tree -> left);
+    free(tree -> word);
     free(tree);
 }
 
@@ -211,11 +211,13 @@ char *strlower(char *word)
     return word;
 }
 
+
 char *read_long_line(FILE *file)
 {
     char *line = NULL;
     int i = 0;
     char c = NULL;
+    int size = 1;
     
     line = (char *)malloc(sizeof(char));
     
@@ -249,10 +251,8 @@ char *read_long_line(FILE *file)
             {
                 return NULL;
             }
-            if (sizeof(line) + sizeof(c) < strlen(line))
-            {
-                line = realloc(line, strlen(line) + 1);
-            }
+            size++;
+            line = realloc(line, size);
             if (isalpha((unsigned char) c))
             {
                 line[i] = (unsigned char)tolower(c);
@@ -265,11 +265,9 @@ char *read_long_line(FILE *file)
             }
         }
     }
-    if (sizeof(line) + sizeof(c) < strlen(line))
-    {
-        line = realloc(line, i + sizeof(c));
-        line[i] = 32;
-    }
+    size++;
+    line = realloc(line, i + sizeof(c));
+    line[i] = 32;
     return line;
 }
 
@@ -289,8 +287,11 @@ struct Node *fileTree(struct Node *tree, FILE *file)
             }
                 token = strtok(NULL, " 0123456789'\?\a?`/=|_\'\"\r\v\f+<>@#$%&*^;:(){}[]-,.\\!\t\b\n");
         }
-    } 
-    free(line);
+    }
+    if (line != NULL)
+    { 
+        free(line);
+    }
     fclose(file);
     return tree;
 }

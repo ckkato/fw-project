@@ -1,13 +1,13 @@
 CC = gcc
-CFLAGS = -Wall -ansi -pedantic -g
-MAIN = fw
-OBJS = fw.o
+CFLAGS = -Wall -std=gnu99 -pedantic -g
+MAIN = mytar
+OBJS = mytar.o
 all : $(MAIN)
 
 $(MAIN) : $(OBJS) 
 	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS)
 
-mytr.o : fw.c
+mytr.o : mytar.c
 	$(CC) $(CFLAGS) -c mytr.c
 
 clean :

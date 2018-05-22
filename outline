@@ -1,0 +1,26 @@
+0.  (Gather input through files)
+    |   
+    V
+    (go through all archive listings)
+    |
+    V
+    (return infor)
+    
+1. I will use the past labs in this project to gather information about the
+input files using stat, the directory functions, and permissions. I also need
+to be able to use handle errors and find paths.
+
+2. I will use a linked list to store my paths. I also need to use a tree to store
+files and other data. 
+
+3. I will be using the following algorithms"
+    -loops to traverse through directory
+    -USTAR
+    
+
+4. subroutines:
+    -permissions()
+    -for each flag
+    
+5. I will makes sure to unittest and system test all my functions and processes
+periodically, as well as making sure my valgrind passes. 
